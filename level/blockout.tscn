@@ -1,0 +1,159 @@
+[gd_scene load_steps=20 format=3 uid="uid://cndiijwhjqky2"]
+
+[ext_resource type="Texture2D" uid="uid://udqkgk3ausxf" path="res://texture/faux-stone-siding-bl/faux-stone-siding_albedo.png" id="1_53lie"]
+[ext_resource type="Material" uid="uid://ctmximkh6w0ov" path="res://material/grid.tres" id="1_e1se8"]
+[ext_resource type="Material" uid="uid://cxq4xktiemchj" path="res://material/walk.tres" id="1_wy5ai"]
+[ext_resource type="PackedScene" uid="uid://hvcob3ety2x4" path="res://scena/person/person.tscn" id="2_eqcb3"]
+[ext_resource type="Texture2D" uid="uid://d3hdrf8ueipgr" path="res://texture/faux-stone-siding-bl/faux-stone-siding_ao.png" id="2_hueq3"]
+[ext_resource type="Texture2D" uid="uid://bkxwx4dwjushb" path="res://texture/faux-stone-siding-bl/faux-stone-siding_height.png" id="3_cnka2"]
+[ext_resource type="PackedScene" uid="uid://leh7n03bjed4" path="res://scena/object/column.tscn" id="3_jdcbh"]
+[ext_resource type="Texture2D" uid="uid://hmd5qnwwtn1d" path="res://texture/floor/untitled_floortile1_baseColor.png" id="4_ii86q"]
+[ext_resource type="Texture2D" uid="uid://15624c3365lx" path="res://texture/faux-stone-siding-bl/faux-stone-siding_metallic.png" id="4_vapoi"]
+[ext_resource type="Texture2D" uid="uid://bsk0jhd1y8i1l" path="res://texture/faux-stone-siding-bl/faux-stone-siding_normal-ogl.png" id="5_hrd17"]
+[ext_resource type="Texture2D" uid="uid://bp215h5dk6o0l" path="res://texture/floor/untitled_floortile1_metallicRoughness.png" id="5_s0gw3"]
+[ext_resource type="Texture2D" uid="uid://7h72qi4i24p0" path="res://texture/floor/untitled_floortile1_normal.png" id="6_0uyx8"]
+[ext_resource type="Texture2D" uid="uid://fxyldb6pr16f" path="res://texture/faux-stone-siding-bl/faux-stone-siding_roughness.png" id="6_bcans"]
+[ext_resource type="Texture2D" uid="uid://ddjv7705y0x4h" path="res://texture/holl_floor/Tiles_Color.jpg" id="7_n33r8"]
+[ext_resource type="Texture2D" uid="uid://dd6ogyry5jxpb" path="res://texture/holl_floor/Tiles_Roughness.jpg" id="8_yu8bg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dlrqt"]
+albedo_texture = ExtResource("1_53lie")
+metallic = 1.0
+metallic_texture = ExtResource("4_vapoi")
+roughness_texture = ExtResource("6_bcans")
+normal_enabled = true
+normal_texture = ExtResource("5_hrd17")
+ao_enabled = true
+ao_texture = ExtResource("2_hueq3")
+heightmap_enabled = true
+heightmap_texture = ExtResource("3_cnka2")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+
+[sub_resource type="Environment" id="Environment_gv0s7"]
+ambient_light_color = Color(0.588235, 0.588235, 0.588235, 1)
+glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.34902, 0.380392, 0.427451, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mpnru"]
+albedo_texture = ExtResource("4_ii86q")
+metallic = 0.65
+metallic_specular = 0.31
+metallic_texture = ExtResource("5_s0gw3")
+roughness_texture = ExtResource("5_s0gw3")
+normal_enabled = true
+normal_texture = ExtResource("6_0uyx8")
+uv1_scale = Vector3(0.2, 0.2, 0.2)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tuefv"]
+albedo_texture = ExtResource("7_n33r8")
+roughness_texture = ExtResource("8_yu8bg")
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+
+[node name="blockout" type="Node3D"]
+
+[node name="block" type="CSGCombiner3D" parent="."]
+material_override = SubResource("StandardMaterial3D_dlrqt")
+use_collision = true
+
+[node name="floor" type="CSGBox3D" parent="block"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 4.5, 0)
+material_override = ExtResource("1_wy5ai")
+size = Vector3(89, 10, 11)
+
+[node name="booling" type="CSGBox3D" parent="block/floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+material_override = ExtResource("1_e1se8")
+operation = 2
+size = Vector3(90, 8, 9)
+
+[node name="holl" type="CSGBox3D" parent="block"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63, 8.5, -1)
+material_override = ExtResource("1_e1se8")
+size = Vector3(53, 18, 43)
+
+[node name="hool_booling" type="CSGBox3D" parent="block/holl"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5, -4.5, 1)
+material_override = ExtResource("1_e1se8")
+operation = 2
+size = Vector3(3, 7, 7)
+
+[node name="hool_booling2" type="CSGBox3D" parent="block/holl"]
+material_override = ExtResource("1_e1se8")
+operation = 2
+size = Vector3(51, 16, 41)
+
+[node name="Person" parent="." instance=ExtResource("2_eqcb3")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -49.3868, 1.30344, -0.464526)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gv0s7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.5, 0.866025, 0, -0.866025, -0.5, 0, 0, 0)
+
+[node name="ColumnCollection" type="Node3D" parent="."]
+
+[node name="Column" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, -49.5792, 0.500001, 4.49399)
+
+[node name="Column2" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, -37.5792, 0.500001, 4.49399)
+
+[node name="Column3" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, -25.5792, 0.500001, 4.49399)
+
+[node name="Column4" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, -13.5792, 0.500001, 4.49399)
+
+[node name="Column5" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, -1.57922, 0.500001, 4.49399)
+
+[node name="Column6" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, 10.4208, 0.500001, 4.49399)
+
+[node name="Column7" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, 22.4208, 0.500001, 4.49399)
+
+[node name="Column8" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, 34.4208, 0.500001, 4.49399)
+
+[node name="Column9" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, -49.5792, 0.500001, -4.26078)
+
+[node name="Column10" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, -37.5792, 0.500001, -4.26078)
+
+[node name="Column11" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, -25.5792, 0.500001, -4.26078)
+
+[node name="Column12" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, -13.5792, 0.500001, -4.26078)
+
+[node name="Column13" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, -1.57922, 0.500001, -4.26078)
+
+[node name="Column14" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, 10.4208, 0.500001, -4.26078)
+
+[node name="Column15" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, 22.4208, 0.500001, -4.26078)
+
+[node name="Column16" parent="ColumnCollection" instance=ExtResource("3_jdcbh")]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, 34.4208, 0.500001, -4.26078)
+
+[node name="textureEnvironment" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="textureEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.0307145, 0)
+use_collision = true
+size = Vector3(88, 1, 11)
+material = SubResource("StandardMaterial3D_mpnru")
+
+[node name="holl2" type="CSGBox3D" parent="textureEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 63, 0.0812206, -1)
+material_override = SubResource("StandardMaterial3D_tuefv")
+size = Vector3(53, 1, 43)

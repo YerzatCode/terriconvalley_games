@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://hvcob3ety2x4"]
+
+[ext_resource type="Script" path="res://scena/person/person.gd" id="1_4bvf8"]
+[ext_resource type="PackedScene" uid="uid://b10ma0bd67g4" path="res://scena/weapon/bow.tscn" id="2_o05l6"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q8brk"]
+
+[node name="Person" type="CharacterBody3D"]
+script = ExtResource("1_4bvf8")
+
+[node name="Colision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_q8brk")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.54605, 0)
+
+[node name="bow" parent="Head" instance=ExtResource("2_o05l6")]
+transform = Transform3D(-0.999893, -0.0139047, 0.00445552, -0.00409493, -0.0258544, -0.999657, 0.0140151, -0.999569, 0.0257947, 0.585, -0.524, -0.495)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]

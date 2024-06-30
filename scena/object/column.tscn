@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://leh7n03bjed4"]
+
+[ext_resource type="PackedScene" uid="uid://bsr0rl5iahmry" path="res://models/coolumn.glb" id="1_1tpfe"]
+
+[node name="Column" type="Node3D"]
+transform = Transform3D(0.401044, 0, 0, 0, 0.401044, 0, 0, 0, 0.401044, 0, 0, 0)
+
+[node name="coolumn" parent="." instance=ExtResource("1_1tpfe")]
